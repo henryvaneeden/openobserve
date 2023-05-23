@@ -57,7 +57,9 @@
               @dragleave="onDragLeave" @dragover="onDragOver" @drop="onDrop"
               :style="dashboardPanelData.data.customQuery && props.pageIndex == dashboardPanelData.meta.stream.customQueryFields.length ? 'border: 1px solid black' : ''">
               <div class="field_overlay" :title="props.row.name">
-                <div class="field_label"
+                <div
+                  :data-test="`field-list-item-${dashboardPanelData.data.fields.stream_type}-${dashboardPanelData.data.fields.stream}-${props.row.name}`"
+                  class="field_label"
                   :draggable="!(promqlMode || (dashboardPanelData.data.customQuery && props.pageIndex >= dashboardPanelData.meta.stream.customQueryFields.length))"
                   @dragstart="onDragStart($event, props.row)">
                   <q-icon name="drag_indicator" color="grey-13"
@@ -71,7 +73,7 @@
                 </div>
                 <div class="field_icons"
                   v-if="!(promqlMode || (dashboardPanelData.data.customQuery && props.pageIndex >= dashboardPanelData.meta.stream.customQueryFields.length))">
-                  <q-btn padding="sm" :disabled="isAddXAxisNotAllowed" @click="addXAxisItem(props.row)">
+                  <q-btn padding="sm" :disabled="isAddXAxisNotAllowed" @click="addXAxisItem(props.row)" data-test="dashboard-add-x-data">
                     <div>
                       {{
                         dashboardPanelData.data.type != "h-bar" ? "+X" : "+Y"
