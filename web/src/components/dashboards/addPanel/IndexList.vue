@@ -56,9 +56,8 @@
             <q-td class="field_list" :props="props" v-mutation="mutationHandler" @dragenter="onDragEnter"
               @dragleave="onDragLeave" @dragover="onDragOver" @drop="onDrop"
               :style="dashboardPanelData.data.customQuery && props.pageIndex == dashboardPanelData.meta.stream.customQueryFields.length ? 'border: 1px solid black' : ''">
-              <div class="field_overlay" :title="props.row.name">
+              <div class="field_overlay" :title="props.row.name" :data-test="`field-list-item-${dashboardPanelData.data.fields.stream_type}-${dashboardPanelData.data.fields.stream}-${props.row.name}`">
                 <div
-                  :data-test="`field-list-item-${dashboardPanelData.data.fields.stream_type}-${dashboardPanelData.data.fields.stream}-${props.row.name}`"
                   class="field_label"
                   :draggable="!(promqlMode || (dashboardPanelData.data.customQuery && props.pageIndex >= dashboardPanelData.meta.stream.customQueryFields.length))"
                   @dragstart="onDragStart($event, props.row)">
@@ -80,7 +79,7 @@
                       }}
                     </div>
                   </q-btn>
-                  <q-btn padding="sm" :disabled="isAddYAxisNotAllowed" @click="addYAxisItem(props.row)">
+                  <q-btn padding="sm" :disabled="isAddYAxisNotAllowed" @click="addYAxisItem(props.row)"  data-test="dashboard-add-y-data">
                     <div>
                       {{
                         dashboardPanelData.data.type != "h-bar" ? "+Y" : "+X"
