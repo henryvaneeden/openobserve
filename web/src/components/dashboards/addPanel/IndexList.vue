@@ -63,7 +63,7 @@
                   @dragstart="onDragStart($event, props.row)">
                   <q-icon name="drag_indicator" color="grey-13"
                     :class="['q-mr-xs', !(promqlMode || (dashboardPanelData.data.customQuery && props.pageIndex >= dashboardPanelData.meta.stream.customQueryFields.length)) ? 'drag_indicator' : 'drag_disabled']"
-                    v-if="!promqlMode" />
+                    v-if="!promqlMode"  data-test="dashboard-add-data-indicator" />
 
                   <q-icon
                     :name="props.row.type == 'Utf8' ? 'text_fields' : props.row.type == 'Int64' ? 'tag' : 'toggle_off'"
