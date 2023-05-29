@@ -86,7 +86,7 @@
                       }}
                     </div>
                   </q-btn>
-                  <q-btn padding="sm" @click="addFilteredItem(props.row.name)">
+                  <q-btn padding="sm" @click="addFilteredItem(props.row.name)"  data-test="dashboard-add-filter-data">
                     <div>+F</div>
                   </q-btn>
                 </div>
