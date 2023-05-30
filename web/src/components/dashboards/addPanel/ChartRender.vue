@@ -17,7 +17,9 @@
   <!-- <div style="height: 40px; z-index: 10;">
       <q-spinner-dots v-if="searchQueryData.loading" color="primary" size="40px" style="margin: 0 auto; display: block;" />
   </div> -->
-  <div ref="chartPanelRef" style="margin-top: 0px; height: calc(100% - 40px);">
+  <div style="margin-top: 0px; height: calc(100% - 40px);">
+        <div style="display: none;" data-test="dashboard-x-label">{{ props.data.fields.x[0].label }}</div>
+        <div style="display: none;" data-test="dashboard-y-label">{{ props.data.fields.y[0].label }}</div>
       <div v-if="props.data.type == 'table'" class="q-pa-sm" style="height: 100%">
           <div class="column" style="height: 100%; position: relative;">
             <q-table v-show="!errorDetail" class="my-sticky-virtscroll-table" virtual-scroll v-model:pagination="pagination"
