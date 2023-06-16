@@ -78,7 +78,7 @@
                 class="field-container flex content-center ellipsis q-pl-lg q-pr-sm"
                 :title="props.row.name"
               >
-                <div class="field_label ellipsis">
+                <div class="field_label ellipsis" :data-test="`logs-field-list-item-${props.row.name}`">
                   {{ props.row.name }}
                 </div>
                 <div class="field_overlay">
@@ -139,7 +139,7 @@
                     class="flex content-center ellipsis"
                     :title="props.row.name"
                   >
-                    <div class="field_label ellipsis">
+                    <div class="field_label ellipsis" :data-test="`logs-field-list-item-${props.row.name}`">
                       {{ props.row.name }}
                     </div>
                     <div class="field_overlay">
