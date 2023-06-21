@@ -265,7 +265,7 @@
                                 "
                                 title="Exclude Term"
                                 round
-                                 :data-test="`log-search-subfield-list-equal-${props.row.name}-field-btn`"
+                                  :data-test="`log-search-subfield-list-not-equal-${props.row.name}-field-btn`"
                               >
                              <q-icon>
                               <NotEqualIcon></NotEqualIcon>
