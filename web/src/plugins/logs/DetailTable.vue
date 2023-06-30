@@ -14,7 +14,7 @@
 -->
 
 <template>
-  <q-card class="column full-height no-wrap searchdetaildialog">
+  <q-card class="column full-height no-wrap searchdetaildialog" data-test="dialog-box">
     <q-card-section class="q-pa-md q-pb-md">
       <div class="row items-center no-wrap">
         <div class="col">
@@ -104,7 +104,7 @@
                   style="display: inline;relative"
                 >
                   <q-btn-dropdown
-                    data-test="log-details-include-exclude-field-btn"
+                    :data-test="`log-details-include-exclude-field-btn-${value}`"
                     size="0.5rem"
                     outlined
                     filled
@@ -112,7 +112,7 @@
                     class="q-mr-sm pointer"
                     name="'img:' + getImageURL('images/common/add_icon.svg')"
                   >
-                    <q-list>
+                    <q-list data-test="field-list-modal">
                       <q-item clickable v-close-popup>
                         <q-item-section>
                           <q-item-label
