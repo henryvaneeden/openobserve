@@ -155,6 +155,7 @@ import {
   ref,
   onDeactivated,
   onActivated,
+  onBeforeMount,
 } from "vue";
 import { useQuasar, date } from "quasar";
 import { useStore } from "vuex";
@@ -176,12 +177,17 @@ import {
   b64EncodeUnicode,
   useLocalTraceFilterField,
   verifyOrganizationStatus,
+  b64DecodeUnicode,
 } from "@/utils/zincutils";
 import segment from "@/services/segment_analytics";
 import config from "@/aws-exports";
 import { logsErrorMessage } from "@/utils/common";
 import { number } from "@intlify/core-base";
 import { stringLiteral } from "@babel/types";
+import {
+  getDurationObjectFromParams,
+  getQueryParamsForDuration,
+} from "@/utils/date";
 
 export default defineComponent({
   name: "PageSearch",
@@ -629,6 +635,7 @@ export default defineComponent({
 
         req.query.sql = b64EncodeUnicode(req.query.sql);
 
+        updateUrlQueryParams();
         return req;
       } catch (e) {
         throw new ErrorException(e.message);
@@ -1026,9 +1033,13 @@ export default defineComponent({
       // getStreamList();
     }
 
-    onMounted(() => {
+    onBeforeMount(() => {
       if (searchObj.loading == false) {
-        searchBarRef?.value?.setEditorValue("duration>10");
+        // eslint-disable-next-line no-prototype-builtins
+        if (!router.currentRoute.value.query.hasOwnProperty("query")) {
+          searchObj.data.editorValue = "duration>10";
+        }
+        restoreUrlQueryParams();
         loadPageData();
       }
     });
@@ -1171,6 +1182,36 @@ export default defineComponent({
         throw new ErrorException("Request failed.");
       }
     };
+
+    function restoreUrlQueryParams() {
+      const queryParams = router.currentRoute.value.query;
+      const date = getDurationObjectFromParams(queryParams);
+      if (date) {
+        searchObj.data.datetime = date;
+      }
+      if (queryParams.query) {
+        searchObj.data.editorValue = b64DecodeUnicode(queryParams.query);
+      }
+    }
+
+    function updateUrlQueryParams() {
+      const date = getQueryParamsForDuration(searchObj.data.datetime);
+      const query = {};
+
+      if (date.period) {
+        query["period"] = date.period;
+      }
+      if (date.from && date.to) {
+        query["from"] = date.from;
+        query["to"] = date.to;
+      }
+
+      query["query"] = b64EncodeUnicode(searchObj.data.editorValue);
+
+      query["org_identifier"] = store.state.selectedOrganization.identifier;
+
+      router.push({ query });
+    }
 
     return {
       store,
