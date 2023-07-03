@@ -14,7 +14,10 @@
 -->
 
 <template>
-  <q-card class="column full-height no-wrap searchdetaildialog" data-test="dialog-box">
+  <q-card
+    class="column full-height no-wrap searchdetaildialog"
+    data-test="dialog-box"
+  >
     <q-card-section class="q-pa-md q-pb-md">
       <div class="row items-center no-wrap">
         <div class="col">
@@ -191,6 +194,7 @@
       <div class="row items-center no-wrap justify-between">
         <div class="col-2">
           <q-btn
+            data-test="log-detail-previous-detail-btn"
             class="text-bold"
             text-color="light-text"
             no-caps
