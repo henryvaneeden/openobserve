@@ -55,7 +55,7 @@
         :filter="searchObj.data.stream.filterField"
         :filter-method="filterFieldFn"
         :pagination="{ rowsPerPage: 10000 }"
-        hide-header
+        hide-header 
         hide-bottom
         :wrap-cells="searchObj.meta.resultGrid.wrapCells"
         class="field-table"
@@ -251,6 +251,7 @@
                                 "
                                 title="Include Term"
                                 round
+                                :data-test="`log-search-subfield-list-equal-${props.row.name}-field-btn`"
                               >
                                 <q-icon>
                                   <EqualIcon></EqualIcon>
